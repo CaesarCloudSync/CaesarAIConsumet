@@ -12,7 +12,7 @@ function getVersions() {
 
 
 # Auth GCP Cloud
-#gcloud auth application-default login
+gcloud auth application-default login
 
 # Change Docker tag in .tf
 read -r oldv newv  <<< $(getVersions)
@@ -25,14 +25,14 @@ docker build -t palondomus/$image:$newv .
 docker push palondomus/$image:$newv
 
 # Terraform Push Google Cloud
-#terraform init
-#terraform plan 
-#terraform apply -auto-approve
+terraform init
+terraform plan 
+terraform apply -auto-approve
 
 # Push Github
-#git add .
-#git commit -m "$1"
-#git push origin -u main:main
+git add .
+git commit -m "$1"
+git push origin -u main:main
 
 # Test application
 docker run -it -p 3000:3000 palondomus/$image:$newv

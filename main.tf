@@ -27,7 +27,7 @@ resource "google_cloud_run_service" "run_service" {
   template {
     spec {
       containers {
-        image = "palondomus/caesaraianimeconsumet:1"
+        image = "palondomus/caesaraianimeconsumet:2"
         ports {
           container_port = 3000
           name           = "caesaraianimeconsumetapiport"
