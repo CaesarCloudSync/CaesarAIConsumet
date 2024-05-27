@@ -15,13 +15,17 @@ import news from './routes/news';
 import chalk from 'chalk';
 import Utils from './utils';
 
-export const redis =
-  process.env.REDIS_HOST &&
-  new Redis({
+export const redis = new Redis("redis://default:AcWyAAIncDE0NjEzYjBhMTQ1NDc0ODFlOTdiMzFiZmUxZWM1MmZkN3AxNTA2MTA@up-weasel-50610.upstash.io:6379", {
+  tls: {
+    rejectUnauthorized: false
+  }
+});
+  /*
+  {
     host: process.env.REDIS_HOST,
     port: Number(process.env.REDIS_PORT),
     password: process.env.REDIS_PASSWORD,
-  });
+  } */
 
 const fastify = Fastify({
   maxParamLength: 1000,
@@ -124,8 +128,8 @@ export const tmdbApi = process.env.TMDB_KEY && process.env.TMDB_KEY;
   }
 
   console.log(chalk.green(`Starting server on port ${PORT}... 🚀`));
-  if (!process.env.REDIS_HOST)
-    console.warn(chalk.yellowBright('Redis not found. Cache disabled.'));
+  //if (!process.env.REDIS_HOST)
+  //  console.warn(chalk.yellowBright('Redis not found. Cache disabled.'));
   if (!process.env.TMDB_KEY)
     console.warn(
       chalk.yellowBright('TMDB api key not found. the TMDB meta route may not work.'),
